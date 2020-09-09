@@ -25,7 +25,7 @@ public class IncrementNumber {
        // arr.add(1);
         arr.add(9);
         arr.add(9);
-        List res = obj.findSum(arr);
+        List<Integer> res = obj.findSum(arr);
         System.out.println(res);
     }
 }
