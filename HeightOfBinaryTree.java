@@ -1,3 +1,4 @@
+import java.util.*;
 public class HeightOfBinaryTree {
     public static class TreeNode {
         int val;
@@ -20,6 +21,36 @@ public class HeightOfBinaryTree {
 
     }
 
+    public int heightIter(TreeNode root){
+        if(root == null) return 0;
+        
+        int max = 1;
+        Stack<Integer> depths = new Stack<>();
+        Stack<TreeNode> nodes = new Stack<>();
+        
+        nodes.push(root);
+        depths.push(1);
+        while(!nodes.isEmpty()){
+            
+            TreeNode cur = nodes.pop();
+            int d = depths.pop();
+            
+            if(cur.left == null && cur.right == null) 
+                max = Math.max(max, d);
+            
+            if(cur.right != null){
+                nodes.push(cur.right);
+                depths.push(d + 1);
+             }
+             if(cur.left != null){
+                nodes.push(cur.left);
+                depths.push(d + 1);
+             }
+        }
+        
+        return max;
+    }
+
     public static void main(String args[]) {
         HeightOfBinaryTree obj = new HeightOfBinaryTree();
         TreeNode tree = new TreeNode(50);
@@ -30,6 +61,7 @@ public class HeightOfBinaryTree {
         tree.right.left = new TreeNode(1);
         tree.right.right = new TreeNode(4);
         System.out.println(obj.findHeight(tree));
+        System.out.println(obj.heightIter(tree));
 
     }
 }
